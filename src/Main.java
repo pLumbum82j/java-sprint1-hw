@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        StepTracker stepTracker = new StepTracker();
         Scanner scanner = new Scanner(System.in);
         printMenu();
         int userInput = scanner.nextInt();
@@ -9,6 +10,13 @@ public class Main {
         while (userInput != 0) {
             if (userInput == 1) {
                 System.out.println("вы выбрали 1");
+                System.out.println("Введите месяц (начиная с нуля)");
+                int month = scanner.nextInt();
+                System.out.println("Введите день");
+                int day = scanner.nextInt();
+                System.out.println("Введите кол-во шагов");
+                int step = scanner.nextInt();
+                System.out.println(stepTracker.monthToData[month]);
             } else if (userInput == 2) {
                 System.out.println("вы выбрали 2");
             } else if (userInput == 3) {
