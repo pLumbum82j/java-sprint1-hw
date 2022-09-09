@@ -25,7 +25,9 @@ public class Main {
 
             } else if (userInput == 2) {
                 System.out.println("Вы выбрали: Вывод статистика шагов за месяц");
-                //stepTracker.getMothStep
+                System.out.println("Введите месяц (начиная с нуля)");
+                int month = scanner.nextInt();
+                stepTracker.printMonthStat(month);
             } else if (userInput == 3) {
                 System.out.println("вы выбрали 3");
             } else if (userInput == 0) {
