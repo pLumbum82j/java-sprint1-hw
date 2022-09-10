@@ -2,13 +2,27 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner ff = new Scanner(System.in);
+
+        //StepTracker miband = new StepTracker();
+        xiami miband = new StepTracker(8);
+        //StepTracker stepTracker2.on = new StepTracker();
+        Cat barsik = new Cat();
+
+        System.out.println();
+
         printMenu();
-        int userInput = scanner.nextInt();
+        int userInput = ff.nextInt();
 
         while (userInput != 0) {
             if (userInput == 1) {
-                System.out.println("вы выбрали 1");
+                System.out.println("Введите месяц (начинается с нуля)");
+                int month = ff.nextInt();
+                System.out.println("Введите число месяца");
+                int day = ff.nextInt();
+                System.out.println("Введите кол-во шагов");
+                int step = scanner.next();
+
             } else if (userInput == 2) {
                 System.out.println("вы выбрали 2");
             } else if (userInput == 3) {
