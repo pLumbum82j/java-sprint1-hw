@@ -3,7 +3,7 @@ import java.util.Scanner;
 /**
  * «Счётчик калорий»
  *
- * @version 1.1
+ * @version 1.2
  * @autor Смирнов Илья
  */
 public class Main {
@@ -77,7 +77,7 @@ public class Main {
     // Меню #2 - Статистика шагов за месяц
     public static void case2(StepTracker stepTracker) {
         System.out.println("Вы выбрали: Вывод статистика шагов за месяц");
-        System.out.println("Введите месяц (начиная с нуля)");
+        System.out.println("Введите месяц");
         int month = getInt();
         while (month > 11 || month < 1) {
             errorMonth();
@@ -89,7 +89,7 @@ public class Main {
     // Меню #3 - Статистика шагов за день
     public static void case3(StepTracker stepTracker) {
         System.out.println("Вы выбрали: Вывод статистика шагов за день");
-        System.out.println("Введите месяц (начиная с нуля)");
+        System.out.println("Введите месяц");
         int month = getInt();
         while (month > 11 || month < 1) {
             errorMonth();
