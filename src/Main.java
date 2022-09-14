@@ -1,8 +1,11 @@
 import java.util.Scanner;
 
-        // Вроде что-то накодил из своей головы.
-        // Приятно с Вами познакомиться мой ревьювер!
-
+/**
+ * «Счётчик калорий»
+ *
+ * @version 1.1
+ * @autor Смирнов Илья
+ */
 public class Main {
     public static void main(String[] args) {
         StepTracker stepTracker = new StepTracker(); // Создаём объект класса stepTracker
@@ -11,68 +14,30 @@ public class Main {
         while (true) {
             printMenu(); // Выводим меню
             int userInput = scanner.nextInt(); // Получаем значение от пользователя
-            if (userInput == 1) {
-                System.out.println("Вы выбрали: Добавление кол-ва шагов за определенный день");
-                System.out.println("Введите месяц (начиная с нуля)");
-                int month = getInt();
-                while (month > 11) {
-                    System.out.println("Вы ввели число больше, чем месяцев, введите число от 0 до 11");
-                    month = getInt();
-                }
-                System.out.println("Введите день");
-                int day = getInt();
-                while (day > 30) {
-                    System.out.println("Вы ввели число больше, чем дней в месяце, введите число от 1 до 30");
-                    day = getInt();
-                }
-                System.out.println("Введите кол-во шагов");
-                int step = getInt();
-                boolean isSuccses = stepTracker.inStepDay(month, day - 1, step);
-                if (isSuccses) {
-                    System.out.println("Данные по шагам за месяц: " + month + ", день: " + day + " - записаны");
-                } else {
-                    System.out.println("Данные за этот день уже есть");
-                }
-            } else if (userInput == 2) {
-                System.out.println("Вы выбрали: Вывод статистика шагов за месяц");
-                System.out.println("Введите месяц (начиная с нуля)");
-                int month = getInt();
-                while (month > 11) {
-                    System.out.println("Вы ввели число больше, чем месяцев, введите число от 0 до 11");
-                    month = getInt();
-                }
-                stepTracker.printMonthStat(month);
-            } else if (userInput == 3) {
-                System.out.println("Вы выбрали: Вывод статистика шагов за день");
-                System.out.println("Введите месяц (начиная с нуля)");
-                int month = getInt();
-                while (month > 11) {
-                    System.out.println("Вы ввели число больше, чем месяцев, введите число от 0 до 11");
-                    month = getInt();
-                }
-                System.out.println("Введите день");
-                int day = getInt();
-                while (day > 30) {
-                    System.out.println("Вы ввели число больше, чем дней в месяце, введите число от 1 до 30");
-                    day = getInt();
-                }
-                stepTracker.printDayStat(month, day - 1);
-            } else if (userInput == 4) {
-                System.out.println("вы выбрали изменение цели по количеству шагов в день");
-                System.out.println("Текущая цель шагов в день состовляет: " + stepTracker.taregetDay);
-                int targt = getInt();
-                System.out.println("Теперь цель шагов в день состовляет: " + stepTracker.changeTrgetStep(targt));
-            } else if (userInput == 0) {
-                System.out.println("Программа завершена");
-                return;
-            } else {
-                System.out.println("Вы ввели несуществующее значение");
+            switch (userInput) {
+                case 1:
+                    case1(stepTracker);
+                    break;
+                case 2:
+                    case2(stepTracker);
+                    break;
+                case 3:
+                    case3(stepTracker);
+                    break;
+                case 4:
+                    case4(stepTracker);
+                    break;
+                case 0:
+                    System.out.println("Программа завершена");
+                    return;
+                default:
+                    System.out.println("Вы ввели несуществующее значение");
             }
         }
-
     }
 
-    public static int getInt() { // Проверка на отрицательное значение
+    // Проверка на отрицательное значение
+    public static int getInt() {
         Scanner scanner = new Scanner(System.in);
         int value = -1;
         while (value < 0) {
@@ -84,7 +49,80 @@ public class Main {
         return value;
     }
 
+    // Меню #1 - Добавление шагов
+    public static void case1(StepTracker stepTracker) {
+        System.out.println("Вы выбрали: Добавление кол-ва шагов за определенный день");
+        System.out.println("Введите месяц");
+        int month = getInt();
+        while (month > 11 || month < 1) {
+            errorMonth();
+            month = getInt();
+        }
+        System.out.println("Введите день");
+        int day = getInt();
+        while (day > 30 || day < 1) {
+            errorDay();
+            day = getInt();
+        }
+        System.out.println("Введите кол-во шагов");
+        int step = getInt();
+        boolean isSuccses = stepTracker.inStepDay(month - 1, day - 1, step);
+        if (isSuccses) {
+            System.out.println("Данные по шагам за месяц: " + month + ", день: " + day + " - записаны");
+        } else {
+            System.out.println("Данные за этот день уже есть");
+        }
+    }
 
+    // Меню #2 - Статистика шагов за месяц
+    public static void case2(StepTracker stepTracker) {
+        System.out.println("Вы выбрали: Вывод статистика шагов за месяц");
+        System.out.println("Введите месяц (начиная с нуля)");
+        int month = getInt();
+        while (month > 11 || month < 1) {
+            errorMonth();
+            month = getInt();
+        }
+        stepTracker.printMonthStat(month - 1);
+    }
+
+    // Меню #3 - Статистика шагов за день
+    public static void case3(StepTracker stepTracker) {
+        System.out.println("Вы выбрали: Вывод статистика шагов за день");
+        System.out.println("Введите месяц (начиная с нуля)");
+        int month = getInt();
+        while (month > 11 || month < 1) {
+            errorMonth();
+            month = getInt();
+        }
+        System.out.println("Введите день");
+        int day = getInt();
+        while (day > 30 || day < 1) {
+            errorDay();
+            day = getInt();
+        }
+        stepTracker.printDayStat(month - 1, day - 1);
+    }
+
+    // Меню #4 - Изменение цели по количеству шагов в день
+    public static void case4(StepTracker stepTracker) {
+        System.out.println("Вы выбрали изменение цели по количеству шагов в день");
+        System.out.println("Текущая цель шагов в день составляет: " + stepTracker.taregetDay);
+        int targt = getInt();
+        System.out.println("Теперь цель шагов в день составляет: " + stepTracker.changeTrgetStep(targt));
+    }
+
+    // Метод ошибки при неправильном значении месяцев
+    public static void errorMonth() {
+        System.out.println("Вы ввели неправильное значение, введите число от 1 до 11");
+    }
+
+    // Метод ошибки при неправильном значении дней
+    public static void errorDay() {
+        System.out.println("Вы ввели неправильное значение, введите число от 1 до 30");
+    }
+
+    // Меню
     private static void printMenu() {
         System.out.println("");
         System.out.println("Что вы хотите сделать? ");

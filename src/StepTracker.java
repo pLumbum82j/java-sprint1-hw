@@ -4,17 +4,16 @@ public class StepTracker {
 
     int monthNum;
     int daysNum;
-    int oneStep;
+
     int taregetDay;
-    int cal;
 
 
     public StepTracker() {
         monthNum = 12; // Количество месяцев 12
         daysNum = 30; // Количество дней в месяце 30
-        oneStep = 75; // 1 шаг равен 75см
+
         taregetDay = 10000; // Цель на день 10000
-        cal = 50; // 1 шаг равен 50 калорий
+
 
         // Массив месяцев
         monthToData = new MonthData[monthNum];
@@ -49,7 +48,7 @@ public class StepTracker {
         for (int i = 0; i < days.length; i++) {
             monthStep = monthStep + days[i];
         }
-        System.out.println("Общее количество шагов за " + month + " месяц: " + monthStep);
+        System.out.println("Общее количество шагов за " + (month + 1) + " месяц: " + monthStep);
 
         // Выводим в консоль максимальное количество шагов за определённый месяц
         int maxStep = 0;
@@ -58,7 +57,7 @@ public class StepTracker {
                 maxStep = days[i];
             }
         }
-        System.out.println("Максимальное пройденное количество шагов в " + month + " месяце составило: " + maxStep);
+        System.out.println("Максимальное пройденное количество шагов в " + (month + 1) + " месяце составило: " + maxStep);
 
         // Выводим в консоль среднее количество шагов за определённый месяц
         double midStep = 0;
@@ -66,11 +65,11 @@ public class StepTracker {
             midStep = midStep + days[i];
         }
         midStep = midStep / days.length;
-        System.out.println("Срееднее количество шагов в месяце " + month + " составило: " + midStep);
+        System.out.println("Срееднее количество шагов в месяце " + (month + 1) + " составило: " + midStep);
 
         // Выводим в консоль конвертируемые значения за определённый месяц
-        System.out.println("Пройденная дистанция (в км): " + converter.convertKm(monthStep, oneStep));
-        System.out.println("Количество сожжённых килокалорий: " + converter.convertCal(monthStep, cal));
+        System.out.println("Пройденная дистанция (в км): " + converter.convertKm(monthStep));
+        System.out.println("Количество сожжённых килокалорий: " + converter.convertCal(monthStep));
 
         // Выводим в консоль лучшую серию подряд идущих шагов за определённый месяц
         System.out.println("Лучшая серия: максимальное количество подряд идущих дней: " + bestSeries(month));
@@ -83,7 +82,7 @@ public class StepTracker {
     void printDayStat(int month, int day) {
         // Выводим в консоль количество шагов за определённый день с проверкой на ежедневную цель
         int daysStep = monthToData[month].days[day];
-        System.out.println("В " + month + " месяце, за " + day + 1 + " день пройдено: " + daysStep);
+        System.out.println("В " + month + 1 + " месяце, за " + day + 1 + " день пройдено: " + daysStep);
         if (daysStep > taregetDay) {
             System.out.println("Ваша ежедневная цель по шагам в этот день выполнена");
         } else {
@@ -93,8 +92,8 @@ public class StepTracker {
         System.out.println("Ваша ежедневная цель по шагам равна " + taregetDay + " шагов");
 
         // Выводим в консоль конвертируемые значения за определённый день
-        System.out.println("Пройденная дистанция (в км): " + converter.convertKm(daysStep, oneStep));
-        System.out.println("Количество сожжённых килокалорий: " + converter.convertCal(daysStep, cal));
+        System.out.println("Пройденная дистанция (в км): " + converter.convertKm(daysStep));
+        System.out.println("Количество сожжённых килокалорий: " + converter.convertCal(daysStep));
     }
 
     // Запись новой цели шагов за один день изменённой пользователем
